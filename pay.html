@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pay | Nimlord Services</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <h1 class="logo">Nimlord<span style="color:#007bff;">Services</span></h1>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="how-it-works.html">How It Works</a></li>
+        <li><a href="pay.html" class="active">Pay</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="pay-section">
+    <h2>Make a Payment</h2>
+    <p>Select your service, then click the button below to pay securely via IntaSend.</p>
+
+    <!-- Replace YOUR_PUBLIC_KEY with your real IntaSend public key -->
+    <button id="payButton">Pay with M-Pesa</button>
+  </main>
+
+  <!-- IntaSend SDK -->
+  <script src="https://js.intasend.com/intasend-inline.js"></script>
+  <script>
+    document.getElementById("payButton").addEventListener("click", function () {
+      const intasend = new window.IntaSend({
+        publicAPIKey: "YOUR_PUBLIC_KEY", // Replace with your IntaSend public key
+        live: false, // Set to true when you're ready to go live
+      });
+
+      intasend.makePayment({
+        amount: 200, // You can make this dynamic based on the selected service
+        email: "client@example.com", // Optional, can be added from a form
+        currency: "KES",
+        paymentMethods: ["MPESA", "CARD"],
+        description: "Payment for Nimlord Services",
+      });
+    });
+  </script>
+</body>
+</html>
